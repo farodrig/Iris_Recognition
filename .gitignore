@@ -41,3 +41,24 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+iriscode/createiristemplate.m
+iriscode/Matching/gethammingdistance.m
+iriscode/Matching/shiftbits.m
+iriscode/Normal_encoding/encode.m
+iriscode/Normal_encoding/gaborconvolve.m
+iriscode/Normal_encoding/normaliseiris.m
+iriscode/README.txt
+iriscode/Segmentation/addcircle.m
+iriscode/Segmentation/adjgamma.m
+iriscode/Segmentation/canny.m
+iriscode/Segmentation/circlecoords.m
+iriscode/Segmentation/findcircle.asv
+iriscode/Segmentation/findcircle.m
+iriscode/Segmentation/findline.m
+iriscode/Segmentation/houghcircle.m
+iriscode/Segmentation/hysthresh.m
+iriscode/Segmentation/linecoords.m
+iriscode/Segmentation/nonmaxsup.m
+iriscode/Segmentation/segmentiris.m
+segmentation.asv
