@@ -1,11 +1,11 @@
-function [ centers, radius ] = segmentation(img)
+function [ centers, radius ] = segmentation(iris)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
-    img = rgb2gray(img);
-    center = [size(img,1)/2, size(img,2)/2];
+    img = rgb2gray(iris);    
     BW = edge(img,'canny');
-    [centersPupil, radiiPupil, ~] = imfindcircles(BW,[20 50], 'method', 'TwoStage', 'EdgeThreshold',0.2);
-    [centersIris, radiiIris, ~] = imfindcircles(BW,[50 80], 'method', 'TwoStage', 'EdgeThreshold',0.2);
+    [centersPupil, radiiPupil, ~] = imfindcircles(BW,[20 40], 'method', 'TwoStage', 'EdgeThreshold',0.2);
+    [centersIris, radiiIris, ~] = imfindcircles(BW,[43 73], 'method', 'TwoStage', 'EdgeThreshold',0.2);
+    center = [size(img,1)/2, size(img,2)/2];
     if(numel(centersIris)>2)
         min = 5000;
         for i = 1:size(centersIris,1)
@@ -21,7 +21,7 @@ function [ centers, radius ] = segmentation(img)
     while(numel(centersPupil)>2)
         index = [];
         for i = 1:size(centersPupil,1)
-            if ~(insideCircle(centersIris(1,:), radiiIris(1), centersPupil(i,1), centersPupil(i,2)))
+            if ~(insideCircle(centersIris(1,:), radiiIris(1), centersPupil(i,:), radiiPupil(i)))
                 index = [index i];
             end
         end
@@ -47,8 +47,9 @@ function [ centers, radius ] = segmentation(img)
         dist = sqrt((x2-x1)^2+(y2-y1)^2);
     end
 
-    function bool = insideCircle(center, radius, x, y)
-        bool = (x-center(1))^2+(y-center(2))<= radius^2;
+    function bool = insideCircle(center1, rad1, center2, rad2)
+        distance = distanceEuc(center1(1), center1(2), center2(1), center2(2));
+        bool = distance>0 && distance<abs(rad1 - rad2);
     end
 end
 
