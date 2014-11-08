@@ -1,4 +1,4 @@
-%Recibe el path y formato de las imagenes (ej : '*.png'), retorna un cell de tamañana (1, n de fotos) con las imagenes
+r4%Recibe el path y formato de las imagenes (ej : '*.png'), retorna un cell de tamañana (1, n de fotos) con las imagenes
 % ejemplo LoadImg('/home/luism/Universidad/Patrones/Face_Dataset/Pratheepan_Dataset/FacePhoto/','*.jpg')
 function img=LoadImg(path,format)
     imgDir=dir([path format]);
