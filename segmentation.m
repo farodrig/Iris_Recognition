@@ -64,6 +64,8 @@ function [ centers, radius ] = segmentation(iris)
         end
         l = l+1;
     end
+    %centersPupil = [centersPupil(2), centersPupil(1)];
+    %centersIris = [centersIris(2), centersIris(1)];
     centers = [centersPupil; centersIris];
     radius = [radiiPupil; radiiIris];
     
