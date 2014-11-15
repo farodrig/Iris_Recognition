@@ -7,16 +7,34 @@ function [ centers, radius ] = segmentation(iris)
     centersPupil = [];
     centersIris = [];
     l = 1;
-    while (isempty(centersPupil) || isempty(centersIris))
-        if (l>size(irisLimits,1))
+    it = 0;
+    radiiPupil = 0;
+    radiiIris = 0;
+    bestCenter = [];
+    bestRad = [];
+    mindiff = 50000;
+    infLimit = floor(0.08*size(iris,1));
+    while (isempty(centersPupil) || isempty(centersIris)) || abs(radiiPupil - radiiIris)<=infLimit
+        if (~isempty(centersPupil) && ~isempty(centersIris) && ~isempty(radiiIris) && ~isempty(radiiPupil)) && abs(radiiPupil - radiiIris)<mindiff
+            bestCenter = [centersPupil; centersIris];
+            bestRad = [radiiPupil; radiiIris];
+            mindiff = abs(radiiPupil - radiiIris);
+        end
+        if (l>size(irisLimits,1)) && (isempty(radiiIris) || isempty(radiiPupil) || (abs(radiiPupil - radiiIris)<=infLimit))
+            centersPupil = [];
+            centersIris = [];
+            it = it+1;
+            l = 1;
+        end        
+        if (l>size(irisLimits,1)) || it+irisLimits(l,3)+5>=irisLimits(l,4)
             centersPupil = [0 0];
             centersIris = [0 0];
             radiiPupil = 0;
             radiiIris = 0;
             break;
         end
-        [centersPupil, radiiPupil, ~] = imfindcircles(BW,[irisLimits(l,1) irisLimits(l,2)], 'method', 'TwoStage', 'EdgeThreshold',0.2);
-        [centersIris, radiiIris, ~] = imfindcircles(BW,[irisLimits(l,3) irisLimits(l,4)], 'method', 'TwoStage', 'EdgeThreshold',0.2);
+        [centersPupil, radiiPupil, ~] = imfindcircles(BW,[irisLimits(l,1) irisLimits(l,2)+it], 'method', 'TwoStage', 'EdgeThreshold',0.2);
+        [centersIris, radiiIris, ~] = imfindcircles(BW,[irisLimits(l,3)+it irisLimits(l,4)], 'method', 'TwoStage', 'EdgeThreshold',0.2);
         if (isempty(centersPupil) || isempty(centersIris))
             l = l+1;
             continue;
@@ -64,11 +82,12 @@ function [ centers, radius ] = segmentation(iris)
         end
         l = l+1;
     end
-    %centersPupil = [centersPupil(2), centersPupil(1)];
-    %centersIris = [centersIris(2), centersIris(1)];
     centers = [centersPupil; centersIris];
     radius = [radiiPupil; radiiIris];
-    
+    if isequal(centers, [0 0;0 0]) && isequal (radius, [0;0])
+        centers = bestCenter;
+        radius = bestRad;
+    end    
     function dist = distanceEuc(x1, y1, x2, y2)
         dist = sqrt((x2-x1)^2+(y2-y1)^2);
     end

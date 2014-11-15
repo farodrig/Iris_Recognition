@@ -1,4 +1,4 @@
-if isempty(imgs)
+if ~exist('imgs', 'var')
     imgs = LoadFiles('DataSet');
 end
 centers = zeros(size(imgs,2), 4);
