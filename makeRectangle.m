@@ -8,7 +8,6 @@ function [ rectangle ] = makeRectangle(iris, centers, radios, length, width, typ
     j=1;
     for theta = degtorad(linspace(0, 360, length))
         i = 1;
-        imshow(img);
         [minrad, maxrad] = rangeIris(img, center, theta);
         for r = linspace(minrad+1, maxrad-1, width)
             x = floor(center(1) + r*cos(theta));
