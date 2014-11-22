@@ -8,7 +8,7 @@ function [ rectangle ] = makeRectangle(iris, centers, radios, length, width, typ
     j=1;
     for theta = degtorad(linspace(0, 360, length))
         i = 1;
-        [minrad, maxrad] = rangeIris(img, center, theta);
+        [minrad, maxrad] = rangeIris(img, center, theta, [centers(3) centers(4)], radios(2));
         for r = linspace(minrad+1, maxrad-1, width)
             x = floor(center(1) + r*cos(theta));
             y = floor(center(2) + r*sin(theta));
@@ -61,13 +61,20 @@ function data = squareData(iris, img, x, y)
     data = double(data);
 end
 
-function [minr, maxr] = rangeIris(img, center, theta)
+function [minr, maxr] = rangeIris(img, center, theta, center_iris, radio)
     minr = 0;
     maxr = 0;
     r = 1;
     while maxr == 0
         xNext = floor(center(1) + r*cos(theta));
         yNext = floor(center(2) + r*sin(theta));
+        if (center_iris(1)-yNext)^2 + (center_iris(2)-xNext)^2>radio^2+2
+            if minr==0
+                minr = r-4;
+            end
+            maxr = r-3; 
+            break;
+        end
         data = img(xNext, yNext);        
         if (minr == 0 && data~=255)
             minr = r;
