@@ -17,7 +17,7 @@ function [ rectangle ] = makeRectangle(iris, centers, radios, length, width, typ
             elseif type==2
                 rectangle(i,j) = gauss(iris, img, x , y);
             else
-                error('Type dado no válida, solo acepta 1 o 2');
+                error('Type dado no vï¿½lida, solo acepta 1 o 2');
             end
             i = i+1;
         end

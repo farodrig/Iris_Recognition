@@ -1,0 +1,8 @@
+if ~exist('rects', 'var')
+    run('carga_rects.m')
+end
+codes = cell(450,1);
+for i = 1 : numel(rects)
+    codes{i} = createCode(rects{i}, centers(i,:), radios(i,:), 360, 35, 1);
+end
+save('rectangles.mat','rects');
