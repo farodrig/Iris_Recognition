@@ -1,7 +1,0 @@
-function dist=getDistance(code1, code2)
-    distancia=hamming(code1,code2);
-    treshold=0.4;
-end
-function distancia=hamming(code1, code2)
-    difference=zeros
-end

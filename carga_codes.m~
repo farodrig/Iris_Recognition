@@ -3,6 +3,6 @@ if ~exist('rects', 'var')
 end
 codes = cell(450,1);
 for i = 1 : numel(rects)
-    codes{i} = createCode(rects{i}, centers(i,:), radios(i,:), 360, 35, 1);
+    codes{i} = createCode(rects{i});
 end
-save('rectangles.mat','rects');
+save('codes_n1.mat','codes');%n1 xq se usa un gabor filter
