@@ -1,8 +1,10 @@
-function distancia=getDistance(code1, code2)
-    treshold=0.33;
+function dist=getDistance(code1, code2)
+    treshold=0.4;
     distancia=hamming(code1,code2);
-    if treshold<0.33
-        distancia=1;
+    if distancia<=treshold
+        dist=1;
+    else
+        dist=0;
     end
 end
 function distancia=hamming(code1, code2)
