@@ -1,5 +1,5 @@
 function dist=getDistance(code1, mask1,code2,mask2) 
-    treshold=0.4;
+    treshold=0.3;
     distancia=hamming2(code1,mask1,code2,mask2);
     if distancia<=treshold
         dist=1;

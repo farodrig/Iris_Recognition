@@ -24,9 +24,9 @@ function [data_train,data_test]=createData(imgs,codes,mask,fin,despl)
 end
 function [dato1,dato2,dato3,dato4]=getDatos(perm,imgs,codes,mask)
     dato1=struct('img',imgs{perm(2)},'code',codes{perm(2)},'mask',mask{perm(2)});
-    dato2=struct('img',imgs{perm(3)},'code',codes{perm(3)},'mask',mask{perm(3)});
-    dato3=struct('img',imgs{perm(4)},'code',codes{perm(4)},'mask',mask{perm(4)});
-    dato4=struct('img',imgs{perm(5)},'code',codes{perm(5)},'mask',mask{perm(5)});
+    dato2=struct('img',imgs{perm(3)},'code',codes{perm(3)},'mask',mask{perm(2)});
+    dato3=struct('img',imgs{perm(4)},'code',codes{perm(4)},'mask',mask{perm(2)});
+    dato4=struct('img',imgs{perm(5)},'code',codes{perm(5)},'mask',codes{perm(2)});
 end
 
 function perm=getPermut(fin)

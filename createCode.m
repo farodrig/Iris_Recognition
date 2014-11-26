@@ -1,4 +1,4 @@
-function iriscode=createCode(img)
+function [iriscode, mask]=createCode(img,noise)
 %Create the iris code for matching, img must be a rectangular iris image
 %usamos solo un filtro de gabor.
     nscale=1; %numero de filtros
@@ -12,6 +12,7 @@ function iriscode=createCode(img)
     k=1;
     length = size(img,2)*2*nscale;
     iriscode = zeros(size(img,1), length);
+    mask=zeros(size(iriscode));
     length2 = size(img,2);
     h = 1:size(img,1);
     %Phase quantisation
@@ -22,5 +23,7 @@ function iriscode=createCode(img)
         %construct the biometric template
         iriscode(h,ja+(2*k)-1) = H1(h, i+1);
         iriscode(h,ja+(2*k)) = H2(h,i+1);
+        mask(h,ja+(2*k)-1) = noise(h, i+1);
+        mask(h,ja+(2*k)) =   noise(h, i+1);
     end
 end 

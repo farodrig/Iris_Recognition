@@ -1,19 +1,16 @@
-function mask=remove_noise(imgRec)
+function img=remove_noise(imgRec)
 %quita el ruido de una imagen, recibe una imagen rectangular
     %ajuste=imadjust(imgRec);
-    mask=zeros(size(imgRec));
-    noise=calculate_var(imgRec);
-    coords = find(isnan(noise));
-    mask(coords) = 1;
+    img=calculate_var(imgRec);
 end
-function mask=calculate_var(imgRec)
+function img=calculate_var(imgRec)
     reference1=imgRec(5:10,10:75);
     reference2=imgRec(5:10,170:175);
     reference3=imgRec(5:10,340:345);
     %grilla=cell(5,72);
     mask=zeros(size(imgRec));
     replace=NaN(5);
-    %imgAux=imgRec;
+    imgAux=imgRec;
     variance_ref1=var(double(reference1(:)));
     variance_ref2=var(double(reference2(:)));
     variance_ref3=var(double(reference3(:)));
@@ -29,13 +26,13 @@ function mask=calculate_var(imgRec)
             variance=var(double(inicial(:)));
             if abs(variance-variance_ref)>=115
                 mask(inicioY:(inicioY+4),inicioX:finX)=replace;
-                %imgAux(inicioY:(inicioY+4),inicioX:finX)=replace;
+                imgAux(inicioY:(inicioY+4),inicioX:finX)=replace;
             end
             finX=finX+4;
             %grilla(floor(inicioY/4)+1,floor(inicioX/4)+1)=inicial;
         end
     end
-    %img=completeImg(imgAux,imgRec);
+    img=completeImg(imgAux,imgRec);
 end
 function img=completeImg(img,imgRec)
     nnan=0;
