@@ -3,7 +3,8 @@ function [ rectangle ] = makeRectangle(iris, centers, radios, length, width, typ
 %   Type==1: sin filtro gaussiano
 %   Type==2: con filtro gaussiano
     rectangle = zeros(width, length, 'uint8');
-    img = isolateIris(rgb2gray(iris), centers, radios);
+    %img = isolateIris(rgb2gray(iris), centers, radios);
+    img = isolateIris(iris, centers, radios);
     center = [(centers(2)+centers(4))/2, (centers(1)+centers(3))/2];
     j=1;
     for theta = degtorad(linspace(0, 360, length))

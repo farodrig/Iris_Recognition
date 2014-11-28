@@ -7,6 +7,6 @@ end
 rects = cell(450,1);
 for i = 1 : numel(imgs)
     lines=filterLines(imgs{i}, centers(i,:), radios(i,:));
-    rects{i} = makeRectangle(lines, centers(i,:), radios(i,:), 360, 30, 1);
+    rects{i} = makeRectangle(lines, centers(i,:), radios(i,:), 360, 30, 2);
 end
-save('rectangles72.mat','rects');
+save('rectangles30.mat','rects');

@@ -1,0 +1,21 @@
+function [expected, real]=testing(train,test)
+    expected=zeros(180,1);
+    real=zeros(180,1);
+    k=1;
+    for i=1:size(test,1)
+        for j=1:size(test,2)
+            expected(k,1)=i;
+            k=k+1;
+        end
+    end
+    k=1;
+    for i=1:size(test,1)
+        for j=1:size(test,2)
+            dist=getDistance(train{i}.code,train{i}.mask,test{i,j}.code,test{i,j}.mask);
+            if(dist==1)
+                real(k,1)=i;
+            end
+            k=k+1;
+        end
+    end
+end

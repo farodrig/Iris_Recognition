@@ -1,11 +1,11 @@
-function intensidad=remove_noise(imgRec)
+function mask=remove_noise(imgRec)
 %quita el ruido de una imagen, recibe una imagen rectangular
 %     mask=zeros(size(imgRec));
 %     noise=calculate_var(imgRec);
 %     coords = find(isnan(noise));
 %     mask(coords) = 1;
-    intensidad=calculate_intensity(imgRec);
-    %mask=calculate_var2(imgRec);
+    %intensidad=calculate_intensity(imgRec);
+    mask=calculate_var2(imgRec);
 end
 function mask=calculate_var(imgRec)
     reference1=imgRec(5:10,10:75);
