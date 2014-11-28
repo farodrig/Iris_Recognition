@@ -63,3 +63,5 @@ iriscode/Segmentation/nonmaxsup.m
 iriscode/Segmentation/segmentiris.m
 segmentation.asv
 IMG_20141115_172605.jpg
+linecoords.m
+try_lines.m

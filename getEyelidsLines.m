@@ -22,6 +22,9 @@ function [ lineUp, lineDown ] = getEyelidsLines( iris, centers, radios )
         [xl, yl] = linecoords(lines, size(topeyelid));
         yl = double(yl) + irl-1;
         xl = double(xl) + icl-1;
+    else
+        xl = 1:size(gray_iris,2);
+        yl = ones(1,size(gray_iris,2));        
     end
     xUp = xl;
     yUp = yl;
@@ -41,16 +44,24 @@ function [ lineUp, lineDown ] = getEyelidsLines( iris, centers, radios )
         end
     end
     lineUp = [yUp; xUp];
+<<<<<<< HEAD
 %     for i = 1:numel(yUp)
 %         gray_iris(yUp(i), xUp(i)) = 255;
 %     end
 
+=======
+    
+    
+>>>>>>> 169732c9d8803fb2492863d38a44d054776c2ec8
     bottomeyelid = gray_iris(max(irl, (rowp+r)):max((rowp-r), size(gray_iris,1)),icl:icu);
     lines = findline(bottomeyelid);
     if size(lines,1) > 0
-        [xl, yl] = linecoords(lines, size(topeyelid));
+        [xl, yl] = linecoords(lines, size(bottomeyelid));
         yl = round(double(yl)+ rowp+r-2);
         xl = round(double(xl) + icl-1);
+    else
+        xl = 1:size(gray_iris,2);
+        yl = ones(1,size(gray_iris,2))*size(gray_iris,1);        
     end
     xDown = xl;
     yDown = yl;
@@ -70,10 +81,13 @@ function [ lineUp, lineDown ] = getEyelidsLines( iris, centers, radios )
         end
     end
     lineDown = [yDown; xDown];
+<<<<<<< HEAD
 %     for i = 1:numel(yDown)
 %         gray_iris(yDown(i), xDown(i)) = 255;
 %     end
     %imshow(gray_iris);
+=======
+>>>>>>> 169732c9d8803fb2492863d38a44d054776c2ec8
 end
 
 function [x,y] = linecoords(lines, imsize)
