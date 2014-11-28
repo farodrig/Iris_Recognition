@@ -6,6 +6,7 @@ if ~exist('centers', 'var') || ~exist('radios', 'var')
 end
 rects = cell(450,1);
 for i = 1 : numel(imgs)
-    rects{i} = makeRectangle(imgs{i}, centers(i,:), radios(i,:), 360, 30, 1);
+    lines=filterLines(imgs{i}, centers(i,:), radios(i,:));
+    rects{i} = makeRectangle(lines, centers(i,:), radios(i,:), 360, 30, 1);
 end
 save('rectangles72.mat','rects');

@@ -5,7 +5,7 @@ function nmatches=matches(train,test)
         for k=1 : 4
             matches(k)=getDistance(train{i}.code,train{i}.mask,test{i,k}.code,test{i,k}.mask);
         end
-        if sum(matches)>=3
+        if sum(matches)>=2
             nmatches(i)=1;
         end
     end
